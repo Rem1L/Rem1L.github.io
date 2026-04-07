@@ -156,6 +156,10 @@ const structuredData = {
         // Set theme immediately to prevent flash
         document.firstElementChild?.setAttribute("data-theme", themeValue);
 
+        // Set language immediately to prevent flash
+        const savedLang = localStorage.getItem("lang") ?? "en";
+        document.firstElementChild?.setAttribute("data-lang", savedLang);
+
         // Export minimal API for external script
         window.theme = {
           themeValue: themeValue,
@@ -172,5 +176,7 @@ const structuredData = {
 
     <!-- Load full theme logic -->
     <script src="../scripts/theme.ts"></script>
+    <!-- Load language toggle logic -->
+    <script src="../scripts/lang.ts"></script>
   </body>
 </html>

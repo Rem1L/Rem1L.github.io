@@ -68,3 +68,12 @@ html[data-theme="dark"] {
 :target {
   scroll-margin-block: 1rem;
 }
+
+/* ========== Bilingual language switching ========== */
+/* Default: show English, hide Chinese */
+.lang-zh { display: none; }
+.lang-en { display: inline; }
+
+/* When lang=zh: show Chinese, hide English */
+[data-lang="zh"] .lang-zh { display: inline; }
+[data-lang="zh"] .lang-en { display: none; }

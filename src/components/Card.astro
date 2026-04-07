@@ -10,7 +10,7 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, description, ...props } = data;
+const { title, titleZh, description, descriptionZh, ...props } = data;
 ---
 
 <li class="my-6">
@@ -25,9 +25,15 @@ const { title, description, ...props } = data;
     <Heading
       style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
     >
-      {title}
+      <span class="lang-en">{title}</span>
+      {titleZh && <span class="lang-zh">{titleZh}</span>}
+      {!titleZh && <span class="lang-zh">{title}</span>}
     </Heading>
   </a>
   <Datetime {...props} />
-  <p>{description}</p>
+  <p>
+    <span class="lang-en">{description}</span>
+    {descriptionZh && <span class="lang-zh">{descriptionZh}</span>}
+    {!descriptionZh && <span class="lang-zh">{description}</span>}
+  </p>
 </li>
