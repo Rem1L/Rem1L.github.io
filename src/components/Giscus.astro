@@ -1,0 +1,47 @@
+---
+// Giscus comments component
+// Uses GitHub Discussions as the comment backend
+// Requires: https://github.com/apps/giscus installed on the repo
+---
+
+<div id="giscus-container" class="mt-8">
+  <script
+    is:inline
+    src="https://giscus.app/client.js"
+    data-repo="Rem1L/Rem1L.github.io"
+    data-repo-id="R_kgDOR8QUhw"
+    data-category="General"
+    data-category-id="DIC_kwDOR8QUh84C6Tub"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async
+  ></script>
+</div>
+
+<script is:inline>
+  // Sync giscus theme with the blog's light/dark mode
+  function syncGiscusTheme() {
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    const theme = isDark ? "dark" : "light";
+    const iframe = document.querySelector("iframe.giscus-frame");
+    if (iframe) {
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme } } },
+        "https://giscus.app"
+      );
+    }
+  }
+
+  // Watch for theme changes
+  const observer = new MutationObserver(syncGiscusTheme);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+</script>

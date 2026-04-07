@@ -1,0 +1,131 @@
+---
+// PretextWrap: magazine-style text wrapping around an image
+// Uses @chenglou/pretext for precise text measurement
+// Usage in MDX:
+//   <PretextWrap src="/my-image.jpg" alt="..." width={200} side="right">
+//     Long paragraph text here...
+//   </PretextWrap>
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;   // image width in px (default 200)
+  side?: "left" | "right";
+  caption?: string;
+}
+
+const {
+  src,
+  alt,
+  width = 200,
+  side = "right",
+  caption,
+} = Astro.props;
+
+const uid = `ptx-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div id={uid} class="pretext-wrap-container relative my-6 overflow-hidden">
+  <!-- Image floated to the side -->
+  <div
+    class:list={[
+      "pretext-wrap-image float-none mb-4",
+      side === "right" ? "sm:float-right sm:ml-6" : "sm:float-left sm:mr-6",
+    ]}
+    style={`width: ${width}px; max-width: 100%;`}
+  >
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      class="w-full rounded-lg object-cover"
+      style={`max-width: ${width}px;`}
+    />
+    {caption && (
+      <p class="mt-1 text-center text-xs text-muted-foreground italic">
+        {caption}
+      </p>
+    )}
+  </div>
+
+  <!-- Text content (slot) -->
+  <div class="pretext-wrap-text" data-uid={uid} data-side={side} data-imgwidth={width}>
+    <slot />
+  </div>
+  <div style="clear: both;"></div>
+</div>
+
+<script>
+  import { prepare, layout } from "@chenglou/pretext";
+
+  // Enhance float layout: on resize, recalculate min-height of text container
+  // so the image is never orphaned from the text.
+  // (The actual line-by-line wrap is handled by CSS float;
+  // pretext is used here for precise height measurement to prevent layout shift.)
+
+  function setupPretextWrap(container: HTMLElement) {
+    const imgEl = container.querySelector(".pretext-wrap-image") as HTMLElement;
+    const textEl = container.querySelector(".pretext-wrap-text") as HTMLElement;
+    if (!imgEl || !textEl) return;
+
+    const imgWidth = parseInt(textEl.dataset.imgwidth ?? "200");
+    const side = textEl.dataset.side ?? "right";
+
+    function measure() {
+      const containerWidth = container.clientWidth;
+      const isFloating = containerWidth >= 640; // sm breakpoint
+
+      if (!isFloating) return;
+
+      const imgHeight = imgEl.offsetHeight;
+      const gap = 24; // ml-6 / mr-6 = 1.5rem = 24px
+      const textWidth = containerWidth - imgWidth - gap;
+
+      // Collect all paragraph text nodes
+      const paragraphs = Array.from(textEl.querySelectorAll("p, li"));
+      if (paragraphs.length === 0) return;
+
+      const fontSize = getComputedStyle(textEl).fontSize;
+      const fontFamily = getComputedStyle(textEl).fontFamily;
+      const lineHeight = parseFloat(getComputedStyle(textEl).lineHeight) || 24;
+      const font = `${fontSize} ${fontFamily}`;
+
+      let totalHeight = 0;
+
+      for (const p of paragraphs) {
+        const text = p.textContent ?? "";
+        if (!text.trim()) continue;
+        try {
+          const prepared = prepare(text, font);
+          // Lines beside the image use reduced width
+          const { height: heightBesideImg } = layout(
+            prepared,
+            textWidth,
+            lineHeight
+          );
+          const { height: heightFull } = layout(
+            prepared,
+            containerWidth,
+            lineHeight
+          );
+          // If text beside image is taller than image, full width kicks in naturally
+          totalHeight += Math.min(heightBesideImg, heightFull) + 16; // 16px paragraph margin
+        } catch {
+          // Fallback: do nothing, let CSS float handle it
+        }
+      }
+
+      // Ensure container is tall enough to show the full image
+      const minHeight = Math.max(imgHeight, totalHeight);
+      container.style.minHeight = `${minHeight}px`;
+    }
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(container);
+  }
+
+  document.querySelectorAll<HTMLElement>(".pretext-wrap-container").forEach(
+    setupPretextWrap
+  );
+</script>
