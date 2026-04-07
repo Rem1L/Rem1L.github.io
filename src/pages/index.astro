@@ -41,15 +41,6 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <span class="sr-only">RSS Feed</span>
       </a>
 
-      <p>
-        Adversarial LLM engineer. My research focuses on IPI, access control in
-        agentic systems, the effectiveness of traditional defenses against
-        LLM-assisted attacks, and LLM-assisted vulnerability discovery.
-      </p>
-      <p class="mt-2">
-        Currently pursuing a PhD at OSU. Always looking for interesting projects
-        to collaborate on.
-      </p>
       {
         // only display if at least one social link is enabled
         SOCIALS.length > 0 && (
