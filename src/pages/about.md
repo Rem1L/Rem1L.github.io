@@ -3,7 +3,7 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-Rem1L is an adversarial LLM engineer with a focus on LLM security research.
+Rem1L is an adversarial LLM engineer with a focus on LLM security research. Rem1L's dream is to build secure agent systems that operate at scale to accelerate space exploration, and one day, his clone will lead humanity to the stars.
 
 **Research Interests**
 
