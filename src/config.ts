@@ -2,7 +2,7 @@ export const SITE = {
   website: "https://rem1l.github.io/", // replace this with your deployed domain
   author: "Rem1L",
   profile: "https://github.com/Rem1L",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  desc: "Adversarial LLM engineer. IPI, agent access control, LLM-assisted vulnerability research. PhD @ OSU.",
   title: "Rem1L",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
