@@ -41,6 +41,10 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <span class="sr-only">RSS Feed</span>
       </a>
 
+      <p class="mt-4">
+        这个 blog 用来记录值得分享的见解，<span class="text-sm opacity-50">（没啥见解的）</span>AI 新闻评价以及各种牢骚。
+      </p>
+
       {
         // only display if at least one social link is enabled
         SOCIALS.length > 0 && (
