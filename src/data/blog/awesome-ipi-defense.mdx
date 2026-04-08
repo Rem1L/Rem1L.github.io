@@ -1,0 +1,43 @@
+---
+title: "I Made an Awesome List for Prompt Injection Defenses"
+titleZh: "我整了一个收集 Prompt Injection Defense 工作的 Awesome List"
+pubDatetime: 2026-04-07T14:00:00Z
+description: "The best existing resource went stale, arxiv kept shipping, so I built a replacement."
+descriptionZh: "之前最好的资源库超过一年没更新了，arxiv 上的论文一篇接一篇，于是我自己搞了一个。"
+tags: ["LLM Security", "IPI", "Research", "Tools"]
+---
+
+import En from "@/components/En.astro";
+import Zh from "@/components/Zh.astro";
+
+<En>
+There's a repo called [`tldrsec/prompt-injection-defenses`](https://github.com/tldrsec/prompt-injection-defenses) that used to be the canonical place to track work on prompt injection defenses. It was well-curated and widely linked. The problem: it hasn't been updated in over a year.
+
+Meanwhile, the research community did not get the memo. New defense papers keep landing on arxiv at a steady clip — detection methods, isolation architectures, finetuning approaches, formal frameworks — and none of them are making it into that list.
+
+So I built a replacement: [`Rem1L/awesome-ipi-defense`](https://github.com/Rem1L/awesome-ipi-defense).
+
+The goal is simple: keep a living, reasonably comprehensive index of work on indirect prompt injection (IPI) defenses. Papers, blog posts, benchmarks, anything that seriously engages with the question of *how do you stop an LLM agent from being hijacked by malicious content in its context*.
+
+It's early. The initial version is seeded from what I could find across arxiv, the old tldrsec list, and some papers I've read over the past year. There will be gaps. If you know of something missing, PRs are open.
+
+One thing I want to avoid is the same fate as its predecessor: going dark after the initial burst of enthusiasm. I'll do my best to keep it maintained, but frankly the best insurance against that is community involvement. If the list is useful to you, the healthiest thing you can do is star it, watch it, and send corrections when you find them.
+
+Prompt injection defense is still an open problem. The least we can do is keep a decent map of where things stand.
+</En>
+
+<Zh>
+有一个叫 [`tldrsec/prompt-injection-defenses`](https://github.com/tldrsec/prompt-injection-defenses) 的 repo，曾经是追踪 prompt injection defense 工作的标准资源。收录质量不错，被广泛引用。问题是：这个 repo 已经超过一年没有更新了。
+
+但研究社区并没有停下来。arxiv 上关于防御方向的论文一篇接一篇地出——检测方法、隔离架构、微调方案、形式化框架——全都没有被收进去。
+
+于是我自己建了一个替代品：[`Rem1L/awesome-ipi-defense`](https://github.com/Rem1L/awesome-ipi-defense)。
+
+目标很简单：维护一个持续更新的、尽量全面的 indirect prompt injection (IPI) 防御工作索引。论文、博客、benchmark，以及一切认真在讨论*怎么阻止 LLM agent 被上下文里的恶意内容劫持*的内容，都在收录范围内。
+
+目前还处于早期阶段。初始版本的内容来自我在 arxiv 上能找到的、旧的 tldrsec 列表里的，以及过去一年我自己读过的论文。肯定有遗漏。如果你知道缺少了什么，欢迎提 PR。
+
+有一件事我很想避免：步前任的后尘——热情爆发之后就沉寂了。我会尽力维护，但坦白说，最好的保险是社区参与。如果你觉得这个列表有用，最有建设性的事情是 star 它、watch 它、发现问题时发 PR。
+
+Prompt injection defense 依然是个开放性问题。我们至少可以维护一份像样的地图，记录这个领域走到了哪里。
+</Zh>
