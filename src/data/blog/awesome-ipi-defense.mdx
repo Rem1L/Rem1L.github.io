@@ -11,19 +11,13 @@ import En from "@/components/En.astro";
 import Zh from "@/components/Zh.astro";
 
 <En>
-There's a repo called [`tldrsec/prompt-injection-defenses`](https://github.com/tldrsec/prompt-injection-defenses) that used to be the canonical place to track work on prompt injection defenses. It was well-curated and widely linked. The problem: it hasn't been updated in over a year.
+I was trying to find a good list of IPI defense papers. [`tldrsec/prompt-injection-defenses`](https://github.com/tldrsec/prompt-injection-defenses) came up — last updated over a year ago. Dozens of arxiv papers nowhere in sight.
 
-Meanwhile, the research community did not get the memo. New defense papers keep landing on arxiv at a steady clip — detection methods, isolation architectures, finetuning approaches, formal frameworks — and none of them are making it into that list.
+So I made one: [`Rem1L/awesome-ipi-defense`](https://github.com/Rem1L/awesome-ipi-defense).
 
-So I built a replacement: [`Rem1L/awesome-ipi-defense`](https://github.com/Rem1L/awesome-ipi-defense).
+To keep it from rotting the same way, there's a weekly GitHub Action that queries Semantic Scholar for papers citing the existing seeds and opens an issue with candidates for manual review. It's citation-based, so papers that don't cite anything already in the list can still slip through — but it catches most of the incremental work automatically.
 
-The goal is simple: keep a living, reasonably comprehensive index of work on indirect prompt injection (IPI) defenses. Papers, blog posts, benchmarks, anything that seriously engages with the question of *how do you stop an LLM agent from being hijacked by malicious content in its context*.
-
-It's early. The initial version is seeded from what I could find across arxiv, the old tldrsec list, and some papers I've read over the past year. There will be gaps. If you know of something missing, PRs are open.
-
-One thing I want to avoid is the same fate as its predecessor: going dark after the initial burst of enthusiasm. I'll do my best to keep it maintained, but frankly the best insurance against that is community involvement. If the list is useful to you, the healthiest thing you can do is star it, watch it, and send corrections when you find them.
-
-Prompt injection defense is still an open problem. The least we can do is keep a decent map of where things stand.
+PRs welcome for the gaps.
 </En>
 
 <Zh>
@@ -33,5 +27,7 @@ arxiv 上那一大堆新的 defense 工作自然也都不在里面。
 
 行吧，那我自己来：[`Rem1L/awesome-ipi-defense`](https://github.com/Rem1L/awesome-ipi-defense)。
 
+为了不步后尘，加了个每周定时跑的 GitHub Action：通过 Semantic Scholar 查已收录论文的引用，有新的就自动开 issue 让人工确认。基于引用追踪，所以跟现有论文没啥引用关系的新工作还是会漏——但日常的增量更新基本能自动覆盖了。
 
+有遗漏欢迎 PR。
 </Zh>
