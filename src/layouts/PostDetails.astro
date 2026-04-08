@@ -25,6 +25,7 @@ const { post, posts } = Astro.props;
 
 const {
   title,
+  titleZh,
   author,
   description,
   ogImage: initOgImage,
@@ -91,12 +92,16 @@ const nextPost =
     class:list={["app-layout pb-12", { "mt-8": !SITE.showBackButton }]}
     data-pagefind-body
   >
-    <h1
-      transition:name={slugifyStr(title.replaceAll(".", "-"))}
-      class="inline-block text-2xl font-bold text-accent sm:text-3xl"
-    >
-      {title}
-    </h1>
+    <div transition:name={slugifyStr(title.replaceAll(".", "-"))}>
+      <h1 class="text-2xl font-bold text-accent sm:text-3xl">
+        {title}
+      </h1>
+      {titleZh && (
+        <p class="mt-1 text-lg font-semibold text-accent/70 sm:text-xl">
+          {titleZh}
+        </p>
+      )}
+    </div>
     <div class="my-2 flex items-center gap-2">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
       <span
